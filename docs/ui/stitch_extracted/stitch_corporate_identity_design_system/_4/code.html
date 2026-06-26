@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Using Inter as a fallback/pairing font as requested in config, but will simulate Vazirmatn feel through Inter's clean lines -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#e7f2ff",
+                    "surface-dim": "#cfdbea",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#fddeb3",
+                    "on-tertiary-container": "#bab29e",
+                    "surface-tint": "#4a6079",
+                    "secondary": "#715b39",
+                    "on-tertiary-fixed": "#1f1b0e",
+                    "on-primary-container": "#9db5d0",
+                    "surface-container-low": "#ecf4ff",
+                    "tertiary": "#332f20",
+                    "on-primary-fixed-variant": "#324960",
+                    "background": "#f7f9ff",
+                    "surface-variant": "#d8e4f2",
+                    "on-secondary-fixed": "#281901",
+                    "on-surface": "#111d27",
+                    "on-primary-fixed": "#021d32",
+                    "on-tertiary-fixed-variant": "#4c4636",
+                    "surface-container-high": "#dde9f8",
+                    "secondary-container": "#fddeb3",
+                    "on-secondary-fixed-variant": "#574324",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#111d27",
+                    "primary-fixed-dim": "#b1c9e5",
+                    "primary": "#193147",
+                    "inverse-surface": "#26323c",
+                    "surface-container": "#e3effe",
+                    "secondary-fixed-dim": "#dfc299",
+                    "primary-fixed": "#cfe5ff",
+                    "primary-container": "#30475e",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#77613f",
+                    "on-error": "#ffffff",
+                    "surface": "#f7f9ff",
+                    "surface-container-highest": "#d8e4f2",
+                    "inverse-primary": "#b1c9e5",
+                    "tertiary-fixed": "#ebe2cc",
+                    "outline": "#73777d",
+                    "on-surface-variant": "#43474d",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#cec6b1",
+                    "tertiary-container": "#4a4535",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f7f9ff",
+                    "outline-variant": "#c3c7cd",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "section-gap": "120px",
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .persian-text { font-family: system-ui, -apple-system, sans-serif; } /* Simulating Vazirmatn with local system fonts */
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm">
+<div class="flex flex-row-reverse justify-between items-center h-[72px] px-margin-desktop max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<div class="font-headline-lg text-headline-lg font-bold text-primary">Enterprise Elite</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex flex-row-reverse items-center gap-8">
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">خانه</a>
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">خدمات</a>
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">پروژه‌ها</a>
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">درباره ما</a>
+<a class="font-label-md text-label-md text-secondary border-b-2 border-secondary pb-1" href="#">بلاگ</a>
+</nav>
+<!-- CTA -->
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all">
+                    مشاوره رایگان
+                </button>
+</div>
+</div>
+</header>
+<main class="pt-24">
+<!-- Hero / Featured Section -->
+<section class="px-margin-desktop max-w-container-max mx-auto py-16">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/10">
+<div class="aspect-video lg:aspect-auto h-full min-h-[400px] relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A professional high-end corporate office interior with panoramic city views at sunset. The lighting is warm and golden, casting elegant shadows on polished marble floors. A large minimalist screen displays complex data visualizations in a palette of navy and white. The overall atmosphere is sophisticated, modern, and high-tech, reflecting global enterprise authority." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCguCvD__Q0BrLkpm-fpdZE6Wp6CldorVdKJMAEDY6sSXL6zfARWQZq_f_JoHxMXdQRcfEGeqS1sehE_F34zcYfRs4YU4M5fIN2OldsUFFmC19Ub-0QCGBYAB0lPq-G7Yn4uec-o6RU8Ziw1uBJfdz-PBcJQWeajvnDT8_CkTGtXZCCloqicJRAuqta413o203bYeJ4tmGrh7gXUfzxSKmh3lawM-O3KTtba09kyAZz3FnErLLZ5kZGHqWwqiyCpwGR73pQPTk84YU"/>
+</div>
+<div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center text-right">
+<div class="flex items-center gap-3 mb-6 justify-end">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-sm text-label-sm">اخبار شرکت</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">۲۴ خرداد ۱۴۰۳</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-6 leading-tight">آینده هوش مصنوعی در مدیریت استراتژیک سازمانی</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed">
+                        چگونه تکنولوژی‌های نوظهور در حال تغییر بنیادین در ساختارهای تصمیم‌گیری مدیران ارشد هستند و چرا انطباق سریع با این تغییرات یک ضرورت حیاتی است.
+                    </p>
+<div>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary group" href="#">
+<span>ادامه مطلب</span>
+<span class="material-symbols-outlined transform group-hover:-translate-x-1 transition-transform">arrow_back</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Filter -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-16">
+<div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
+<button class="px-6 py-2 rounded-full font-label-md text-label-md bg-primary text-on-primary">همه مقالات</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">اخبار شرکت</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">آموزش</button>
+<button class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface hover:bg-surface-variant transition-colors">تحلیل بازار</button>
+</div>
+</section>
+<!-- Article Grid -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10 hover:shadow-lg transition-all duration-300 group">
+<div class="aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A diverse group of professional executives in a sleek, minimalist conference room engaged in a deep strategic discussion. The room features glass walls, neutral tones, and accent lighting. The mood is focused and collaborative, with a high-key lighting aesthetic that highlights a clean, professional corporate environment in navy and grey tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2wIkeuYPugXYTxeA78_0fQF2xOdhUj2j-hl34nYZSCUa8otQITElzOGVToyo-TtoLncE90wDUBXzyuGXiRDXH0o5XyKoYZc30NXYTkaVPV1qrg6v38TfskeGMb2ByDXvOn0n7WSgC4OtfHNi-0pX0CiQrywykGr85P_-wULwbEP43vLd9XKf_QhuJoULeH0lnR6HpJOMKiNKLKm4ubkJCoCoJPt3tLGXHDFXUlPyhJOwWT-Ydb2Yq_qrC729EPN9AkyOo00C5XGY"/>
+</div>
+<div class="p-6 text-right">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant font-label-sm text-label-sm">۱۸ خرداد ۱۴۰۳</span>
+<span class="text-secondary font-label-sm text-label-sm font-bold">آموزش</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-3 leading-snug">بهینه‌سازی زنجیره تأمین در بازارهای جهانی</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mb-6">
+                            بررسی راهکارهای عملی برای کاهش هزینه‌های عملیاتی و افزایش بهره‌وری در شرایط پیچیده اقتصادی امروز.
+                        </p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary border-b border-transparent hover:border-primary transition-all" href="#">
+                            مطالعه بیشتر
+                        </a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10 hover:shadow-lg transition-all duration-300 group">
+<div class="aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of high-quality premium stationery and a fountain pen on a dark wood desk next to a modern laptop. The lighting is moody yet clear, with focused illumination highlighting textures of paper and leather. The scene represents meticulous professional planning and traditional enterprise values meeting modern technology in a luxury office setting." src=""/>
+</div>
+<div class="p-6 text-right">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant font-label-sm text-label-sm">۱۵ خرداد ۱۴۰۳</span>
+<span class="text-secondary font-label-sm text-label-sm font-bold">تحلیل بازار</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-3 leading-snug">گزارش سالانه تحلیل فرصت‌های سرمایه‌گذاری</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mb-6">
+                            نگاهی عمیق به بخش‌های پربازده در سال پیش رو و تحلیل ریسک‌های احتمالی در بازارهای مالی بین‌المللی.
+                        </p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary border-b border-transparent hover:border-primary transition-all" href="#">
+                            مطالعه بیشتر
+                        </a>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10 hover:shadow-lg transition-all duration-300 group">
+<div class="aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A modern, airy architectural interior featuring large glass panels and sleek steel structures. Bright natural light floods the space, creating a clean and open atmosphere. The composition emphasizes scale and precision, with a minimalist aesthetic dominated by soft whites and deep navy shadows, reflecting a sense of corporate transparency and progress." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbJUSnFlnOCO_qsxLpmWYyZLxPQLc8Hr_fglQjTO5gy1EaUj8dMIGBHPMMVYViI025Wub6bcItVAI-hJUaDSa74plEBEP2XsZe7dVFriC5Xk-m0qunOxJ1KpAOtz2n8c44Hdr_NMaWVYf8-WMkGdwcbXcJ2-XjYbxY1lX65FyGKOBEDy6oQChCDSihdyEy0gf0fj6PpGlqODhMNMMbKxcBoaw9yLHcMkQAY8LqejSp6tmrDv2D0E7RHcISN3De63nf75RqEyHo_ZI"/>
+</div>
+<div class="p-6 text-right">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant font-label-sm text-label-sm">۱۰ خرداد ۱۴۰۳</span>
+<span class="text-secondary font-label-sm text-label-sm font-bold">اخبار شرکت</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-3 leading-snug">افتتاح شعبه جدید اینترپرایز الیت در دبی</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mb-6">
+                            گسترش فعالیت‌های منطقه‌ای و ارائه خدمات مشاوره‌ای مستقیم به شرکای تجاری در خاورمیانه.
+                        </p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary border-b border-transparent hover:border-primary transition-all" href="#">
+                            مطالعه بیشتر
+                        </a>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10 hover:shadow-lg transition-all duration-300 group">
+<div class="aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A team of young professionals working together around a minimalist table in a brightly lit studio. The environment is creative yet orderly, with high-quality tech tools visible. The color palette is composed of soft creams, navy accents, and gold lighting, embodying a spirit of modern innovation and elite corporate culture." src=""/>
+</div>
+<div class="p-6 text-right">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant font-label-sm text-label-sm">۰۵ خرداد ۱۴۰۳</span>
+<span class="text-secondary font-label-sm text-label-sm font-bold">آموزش</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-3 leading-snug">تکنیک‌های رهبری تیم‌های دورکار</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mb-6">
+                            مدیریت موثر تیم‌های پراکنده و استفاده از ابزارهای دیجیتال برای حفظ انسجام سازمانی.
+                        </p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary border-b border-transparent hover:border-primary transition-all" href="#">
+                            مطالعه بیشتر
+                        </a>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10 hover:shadow-lg transition-all duration-300 group">
+<div class="aspect-[16/10] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional businessman in a tailored navy suit checking a luxury wristwatch in a high-end lobby. The scene is illuminated by soft, expensive architectural lighting. The environment is pristine, featuring glass, metal, and polished stone. The mood communicates time management, precision, and high-level corporate success." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlQ3GOh7zpr6YhHbS97fTUMU9r2FjDwVyCra63wQkorwq_xe5irznMfgu4_nMQB5l3Lgy1IpPd_YufTM0iBUEBsvrqIzfN4lqQj6TcWt2Qxr7E2RgCtN8USJXrA8b-hhDYkHeBnEJIZ88ElUBKBi1d_9ITGKo2L1ephtRxKVGuItzI_bIYUAMmR7OGxyyX-lnPSRxiyeqcpkMdill0ruuzjXFZjuQgBC9B9P12EgJVkP4PDzyib6n4V-_sKcSrkTRRYan2hkpOWhE"/>
+</div>
+<div class="p-6 text-right">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant font-label-sm text-label-sm">۰۱ خرداد ۱۴۰۳</span>
+<span class="text-secondary font-label-sm text-label-sm font-bold">تحلیل بازار</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-3 leading-snug">امنیت داده‌ها در عصر اقتصاد دیجیتال</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3 mb-6">
+                            بررسی پروتکل‌های امنیتی جدید و چالش‌های حفظ حریم خصوصی در پروژه‌های بزرگ مقیاس.
+                        </p>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary border-b border-transparent hover:border-primary transition-all" href="#">
+                            مطالعه بیشتر
+                        </a>
+</div>
+</article>
+<!-- Newsletter Bento -->
+<article class="flex flex-col bg-primary rounded-xl overflow-hidden p-8 text-right justify-center relative">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-secondary-fixed text-4xl mb-4">mail</span>
+<h3 class="font-headline-xl text-headline-xl text-on-primary mb-4 leading-tight">عضویت در خبرنامه تخصصی</h3>
+<p class="font-body-md text-body-md text-on-primary/80 mb-8">
+                            آخرین تحلیل‌ها و گزارش‌های اقتصادی را مستقیماً در ایمیل خود دریافت کنید.
+                        </p>
+<div class="flex flex-col gap-3">
+<input class="bg-primary-container border border-on-primary-container/20 text-on-primary px-4 py-3 rounded-lg focus:ring-2 focus:ring-secondary-fixed outline-none placeholder:text-on-primary/40 text-right" placeholder="آدرس ایمیل شما" type="email"/>
+<button class="bg-secondary-fixed text-on-secondary-fixed py-3 rounded-lg font-label-md text-label-md font-bold hover:bg-secondary-fixed-dim transition-colors">عضویت</button>
+</div>
+</div>
+<!-- Background Accent -->
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-secondary-container/10 rounded-full blur-3xl"></div>
+</article>
+</div>
+</section>
+<!-- Pagination -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-section-gap flex justify-center items-center gap-4">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md">۱</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant font-label-md text-label-md hover:bg-surface-variant">۲</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant font-label-md text-label-md hover:bg-surface-variant">۳</button>
+</div>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap bg-primary dark:bg-surface-container-lowest">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto direction-rtl text-right">
+<!-- Brand Info -->
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-xl text-headline-xl text-on-primary mb-6">Enterprise Elite</div>
+<p class="font-body-md text-body-md text-on-primary/80 leading-relaxed mb-6">
+                    پیشرو در ارائه راهکارهای استراتژیک و مدیریت سرمایه برای سازمان‌های تراز اول جهانی.
+                </p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-primary/60 hover:text-secondary-fixed transition-colors cursor-pointer">public</span>
+<span class="material-symbols-outlined text-on-primary/60 hover:text-secondary-fixed transition-colors cursor-pointer">chat</span>
+<span class="material-symbols-outlined text-on-primary/60 hover:text-secondary-fixed transition-colors cursor-pointer">linked_camera</span>
+</div>
+</div>
+<!-- Quick Links -->
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-primary mb-6">لینک‌های سریع</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors" href="#">خدمات ما</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors" href="#">پروژه‌های شاخص</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors" href="#">فرصت‌های شغلی</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors" href="#">سوالات متداول</a></li>
+</ul>
+</div>
+<!-- Resources -->
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-primary mb-6">منابع</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-secondary-fixed font-bold" href="#">بلاگ تخصصی</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors" href="#">گزارش‌های سالانه</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors" href="#">حریم خصوصی</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors" href="#">شرایط استفاده</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-primary mb-6">تماس با ما</h4>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-on-primary/80">
+<span class="material-symbols-outlined text-secondary-fixed">location_on</span>
+<span class="font-body-md text-body-md">تهران، خیابان ولیعصر، برج تجارت</span>
+</li>
+<li class="flex items-center gap-3 text-on-primary/80">
+<span class="material-symbols-outlined text-secondary-fixed">phone</span>
+<span class="font-body-md text-body-md">۰۲۱-۸۸۰۰۰۰۰۰</span>
+</li>
+<li class="flex items-center gap-3 text-on-primary/80">
+<span class="material-symbols-outlined text-secondary-fixed">mail</span>
+<span class="font-body-md text-body-md">info@enterprise-elite.com</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-16 pt-8 border-t border-on-primary/10 text-center">
+<p class="font-label-sm text-label-sm text-on-primary/60">© ۲۰۲۴ اینترپرایز الیت. تمامی حقوق محفوظ است.</p>
+</div>
+</footer>
+<script>
+        // Optional smooth scroll interaction
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Sticky Navbar effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

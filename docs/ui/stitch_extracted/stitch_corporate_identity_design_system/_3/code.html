@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>پروژه‌ها | Enterprise Elite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Variable.woff2') format('woff2');
+        }
+        body {
+            font-family: 'Vazirmatn', 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .transition-standard {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#e7f2ff",
+                      "surface-dim": "#cfdbea",
+                      "error": "#ba1a1a",
+                      "secondary-fixed": "#fddeb3",
+                      "on-tertiary-container": "#bab29e",
+                      "surface-tint": "#4a6079",
+                      "secondary": "#715b39",
+                      "on-tertiary-fixed": "#1f1b0e",
+                      "on-primary-container": "#9db5d0",
+                      "surface-container-low": "#ecf4ff",
+                      "tertiary": "#332f20",
+                      "on-primary-fixed-variant": "#324960",
+                      "background": "#f7f9ff",
+                      "surface-variant": "#d8e4f2",
+                      "on-secondary-fixed": "#281901",
+                      "on-surface": "#111d27",
+                      "on-primary-fixed": "#021d32",
+                      "on-tertiary-fixed-variant": "#4c4636",
+                      "surface-container-high": "#dde9f8",
+                      "secondary-container": "#fddeb3",
+                      "on-secondary-fixed-variant": "#574324",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#111d27",
+                      "primary-fixed-dim": "#b1c9e5",
+                      "primary": "#193147",
+                      "inverse-surface": "#26323c",
+                      "surface-container": "#e3effe",
+                      "secondary-fixed-dim": "#dfc299",
+                      "primary-fixed": "#cfe5ff",
+                      "primary-container": "#30475e",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#77613f",
+                      "on-error": "#ffffff",
+                      "surface": "#f7f9ff",
+                      "surface-container-highest": "#d8e4f2",
+                      "inverse-primary": "#b1c9e5",
+                      "tertiary-fixed": "#ebe2cc",
+                      "outline": "#73777d",
+                      "on-surface-variant": "#43474d",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#cec6b1",
+                      "tertiary-container": "#4a4535",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f7f9ff",
+                      "outline-variant": "#c3c7cd",
+                      "on-primary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "section-gap": "120px",
+                      "margin-desktop": "64px",
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "label-md": ["Vazirmatn", "Inter"],
+                      "display-lg": ["Vazirmatn", "Inter"],
+                      "body-md": ["Vazirmatn", "Inter"],
+                      "headline-xl": ["Vazirmatn", "Inter"],
+                      "headline-lg": ["Vazirmatn", "Inter"],
+                      "body-lg": ["Vazirmatn", "Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm">
+<div class="flex flex-row-reverse justify-between items-center h-[72px] px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-lg text-headline-lg font-bold text-primary">Enterprise Elite</div>
+<div class="hidden md:flex flex-row-reverse gap-8 items-center">
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">خانه</a>
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">خدمات</a>
+<a class="font-label-md text-label-md text-secondary border-b-2 border-secondary pb-1" href="#">پروژه‌ها</a>
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">درباره ما</a>
+<a class="font-label-md text-label-md text-on-surface hover:text-secondary transition-colors" href="#">بلاگ</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all">
+                مشاوره رایگان
+            </button>
+</div>
+</nav>
+<!-- Page Header -->
+<header class="pt-[140px] pb-section-gap bg-surface px-margin-desktop">
+<div class="max-w-container-max mx-auto text-center">
+<h1 class="font-display-lg text-display-lg text-primary mb-6">نمونه پروژه‌های شاخص</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                ما در اینترپرایز الیت با بهره‌گیری از تخصص جهانی و استانداردهای نوین، پیچیده‌ترین چالش‌های مهندسی و مدیریتی را در حوزه‌های مختلف به واقعیت تبدیل می‌کنیم.
+            </p>
+<div class="w-16 h-1 bg-secondary mx-auto mt-12"></div>
+</div>
+</header>
+<!-- Filters Section -->
+<section class="mb-16 px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<div class="flex flex-wrap justify-center gap-4" id="filter-container">
+<button class="filter-btn active bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md shadow-lg transition-standard" onclick="filterProjects('all')">همه پروژه‌ها</button>
+<button class="filter-btn bg-surface-container text-on-surface px-8 py-3 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-standard" onclick="filterProjects('Healthcare')">درمانی و سلامت</button>
+<button class="filter-btn bg-surface-container text-on-surface px-8 py-3 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-standard" onclick="filterProjects('Industrial')">صنعتی و زیرساخت</button>
+<button class="filter-btn bg-surface-container text-on-surface px-8 py-3 rounded-full font-label-md text-label-md hover:bg-secondary-container transition-standard" onclick="filterProjects('Commercial')">تجاری و اداری</button>
+</div>
+</div>
+</section>
+<!-- Projects Grid -->
+<main class="pb-section-gap px-margin-desktop">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" id="projects-grid">
+<!-- Project Card 1 -->
+<div class="project-card group relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 transition-standard" data-category="Healthcare">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Modern Hospital Architecture" class="project-image w-full h-full object-cover transition-standard" data-alt="A futuristic and luxurious medical center with glass facades and sleek white curves. The building is surrounded by lush green landscaping under a warm golden hour light. The architecture conveys trust and technological advancement with a premium corporate aesthetic, incorporating navy blue and soft cream tones." src=""/>
+<div class="project-overlay absolute inset-0 bg-primary/40 opacity-0 transition-standard flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-4xl">visibility</span>
+</div>
+</div>
+<div class="p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block uppercase tracking-wider">Healthcare</span>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-4">مجتمع درمانی مدرن الیت</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">طراحی و اجرای پیشرفته‌ترین مرکز جراحی قلب با استانداردهای نوین بین‌المللی و سیستم‌های هوشمند مدیریت انرژی.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:gap-4 transition-standard" href="#">
+                        مشاهده جزئیات
+                        <span class="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="project-card group relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 transition-standard" data-category="Industrial">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Smart Logistics Center" class="project-image w-full h-full object-cover transition-standard" data-alt="An expansive industrial warehouse with automated robotic systems and high-tech lighting. The interior is clean, organized, and illuminated by cool blue and bright white LEDs, creating a high-performance atmosphere. The perspective is dynamic, showcasing the scale and sophistication of a modern global supply chain hub." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="project-overlay absolute inset-0 bg-primary/40 opacity-0 transition-standard flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-4xl">visibility</span>
+</div>
+</div>
+<div class="p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block uppercase tracking-wider">Industrial</span>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-4">مرکز لجستیک هوشمند خاورمیانه</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">پیاده‌سازی اتوماسیون کامل در انبارداری و توزیع با ظرفیت پردازش ۱۰۰ هزار واحد در ساعت.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:gap-4 transition-standard" href="#">
+                        مشاهده جزئیات
+                        <span class="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="project-card group relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 transition-standard" data-category="Commercial">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Luxury Corporate Tower" class="project-image w-full h-full object-cover transition-standard" data-alt="A towering glass skyscraper reflecting a dramatic sunset sky. The architectural lines are sharp and elegant, emphasizing height and corporate power. The facade features premium steel and dark glass materials. The lighting is sophisticated, with interior office glows contrasting against the deep blue twilight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKNtnGA1s8PG2tDm4e6cuvADh35oLsW_ihL5vFNsHi-npwYjCKyPacWQBSVO0Ixz1KaqItZVu7RmwZuAHWHLU04BOwIm5vbzC8pMvGrSBbOSX565q_jLYpdZ2t8eHzoDUbXpgjjiqC2qijS6GYexfehdkCzlxNaqhD3wjQjYjHwgkZrmoeHoWkN8XSxuk_ux3XuKU0VbiwDJnu19pdneRnA8rwG4m1F3GRivJLSBXbgZJQ9qxzvVtm7vhXgi8t3ctF5IzcnNpj124"/>
+<div class="project-overlay absolute inset-0 bg-primary/40 opacity-0 transition-standard flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-4xl">visibility</span>
+</div>
+</div>
+<div class="p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block uppercase tracking-wider">Commercial</span>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-4">برج اداری پلاتینیوم</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">ساخت بلندمرتبه‌ترین برج اداری منطقه با گواهینامه LEED Gold و فضاهای کار اشتراکی لوکس.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:gap-4 transition-standard" href="#">
+                        مشاهده جزئیات
+                        <span class="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project Card 4 -->
+<div class="project-card group relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 transition-standard" data-category="Industrial">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Renewable Energy Plant" class="project-image w-full h-full object-cover transition-standard" data-alt="A massive solar farm and wind turbine installation located in a high-contrast desert landscape. The rows of panels are arranged with mathematical precision, reflecting the clear blue sky. The scene is bright and optimistic, highlighting sustainable industrial power with a crisp, clean photographic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDheNGMjWLhKMazCrrQ5QykKafA4A3VgbcxiBIh3SrO_fV_BtfBJnWM4XTTN-cyDdQOVxTwWlXA21uMck_aNsa5Adx_GJqjq9NDdsMcq_nLwzjH3Q15AYqrZvn9Fa3zfUfL7Xd0TBEHvZA_vDkBlDpkzsyOs1DQhH0iQdrCnpT5ZVMCEFxp-XR1LvTUV2YQAzKehSh2eElz9iaGiPaji8_8sHnY1doJ3R1AAZ2MGjRE99Qsq6Yn01oVC-DS1HDZILh4j-SyEgu0CrU"/>
+<div class="project-overlay absolute inset-0 bg-primary/40 opacity-0 transition-standard flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-4xl">visibility</span>
+</div>
+</div>
+<div class="p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block uppercase tracking-wider">Industrial</span>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-4">نیروگاه خورشیدی تابان</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">بزرگترین پروژه انرژی‌های تجدیدپذیر کشور با هدف تامین برق ۱۰ هزار واحد صنعتی.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:gap-4 transition-standard" href="#">
+                        مشاهده جزئیات
+                        <span class="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project Card 5 -->
+<div class="project-card group relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 transition-standard" data-category="Healthcare">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Advanced Biotech Lab" class="project-image w-full h-full object-cover transition-standard" data-alt="A pristine, ultra-modern scientific laboratory with high-end glass equipment and white surfaces. Subtle gold and navy accents are used in the interior design. The lighting is bright and clinically clean, emphasizing innovation and meticulous attention to detail in a corporate research environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI-q8ou6ydUjiwUidcCtzrCA9fGuQHgVCYH1UQwmaqOQi974PHNMzIwbAsnBgyzBTEABXRV_OQyESv9RjqKx_LCvHntO-r1er3h_tMxCv6oPH_dZhSbi1rOCdLZaK5dPfldjiSAkNZmgHLSmGtaR-b4tfo6dkIQosFocp_b5PsBkrwrBGlYqtXIhPBuX4I-4rBIeF_lrVbKpsqz8xOK2BjRsLpXQK5YMhnBwuGAStIbax9nPpiN2kSk68Ft4hkCkU4XcKqpp85tvQ"/>
+<div class="project-overlay absolute inset-0 bg-primary/40 opacity-0 transition-standard flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-4xl">visibility</span>
+</div>
+</div>
+<div class="p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block uppercase tracking-wider">Healthcare</span>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-4">آزمایشگاه جامع ژنتیک فارابی</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">تجهیز و راه‌اندازی واحد تحقیق و توسعه با تکنولوژی سکوئنسینگ نسل جدید.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:gap-4 transition-standard" href="#">
+                        مشاهده جزئیات
+                        <span class="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Project Card 6 -->
+<div class="project-card group relative bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 transition-standard" data-category="Commercial">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="High-end Retail Mall" class="project-image w-full h-full object-cover transition-standard" data-alt="A luxury shopping mall interior with high ceilings, marble floors, and minimalist store fronts. Soft warm lighting highlights the premium textures and spacious corridors. The atmosphere is quiet and exclusive, using a sophisticated color palette of white, gold, and deep navy accents." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="project-overlay absolute inset-0 bg-primary/40 opacity-0 transition-standard flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-4xl">visibility</span>
+</div>
+</div>
+<div class="p-8">
+<span class="font-label-sm text-label-sm text-secondary mb-2 block uppercase tracking-wider">Commercial</span>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-4">مرکز تجاری اطلس</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">بازطراحی تجربه خرید لوکس با معماری تلفیقی سنتی و مدرن در قلب پایتخت.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:gap-4 transition-standard" href="#">
+                        مشاهده جزئیات
+                        <span class="material-symbols-outlined text-sm rotate-180">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary py-section-gap w-full">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto direction-rtl">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-xl text-headline-xl text-on-primary mb-6">Enterprise Elite</div>
+<p class="text-on-primary/70 font-body-md text-body-md">
+                    پیشرو در ارائه خدمات نوین مهندسی و مشاوره‌های تخصصی در سطح جهانی.
+                </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-secondary-fixed font-bold text-lg mb-2">لینک‌های سریع</h4>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">خدمات ما</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">پروژه‌های شاخص</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">تماس با ما</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">حریم خصوصی</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-secondary-fixed font-bold text-lg mb-2">بخش‌های تخصصی</h4>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">دپارتمان عمران</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">واحد تکنولوژی</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">مشاوره استراتژیک</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed-dim transition-colors" href="#">مدیریت پروژه</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-secondary-fixed font-bold text-lg mb-2">ارتباط با ما</h4>
+<p class="text-on-primary/80 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                    تهران، خیابان ولیعصر، برج الیت
+                </p>
+<p class="text-on-primary/80 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">mail</span>
+                    info@enterprise-elite.com
+                </p>
+<div class="flex gap-4 mt-4">
+<a class="w-10 h-10 rounded-full border border-on-primary/20 flex items-center justify-center text-on-primary hover:bg-secondary-fixed hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-on-primary/20 flex items-center justify-center text-on-primary hover:bg-secondary-fixed hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+</div>
+</div>
+</div>
+<div class="mt-20 pt-8 border-t border-on-primary/10 text-center px-margin-desktop max-w-container-max mx-auto">
+<p class="text-on-primary/60 font-body-md text-body-md">© ۲۰۲۴ اینترپرایز الیت. تمامی حقوق محفوظ است.</p>
+</div>
+</footer>
+<script>
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-lg');
+                btn.classList.add('bg-surface-container', 'text-on-surface');
+            });
+
+            event.target.classList.add('bg-primary', 'text-on-primary', 'shadow-lg');
+            event.target.classList.remove('bg-surface-container', 'text-on-surface');
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+
+        // Simple reveal animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
+            observer.observe(card);
+        });
+    </script>
+</body></html>
