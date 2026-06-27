@@ -27,3 +27,11 @@ coverage/
 tmp/
 temp/
 *.tmp
+
+# Local design/reference assets
+docs/ui/
+
+# Python artifacts
+backend/data/*.db
+backend/__pycache__/
+backend/**/*.pyc
