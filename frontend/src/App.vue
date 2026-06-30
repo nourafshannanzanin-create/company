@@ -1,6 +1,6 @@
 ﻿<script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
-import featureStrategyImage from "./assets/photos/feature-team.jpg";
+import featureStrategyImage from "./assets/photos/team-profile.png";
 import heroCollaborationImage from "./assets/photos/hero-team.jpg";
 import projectCorporateImage from "./assets/photos/project-corporate.jpg";
 import projectDashboardImage from "./assets/photos/project-dashboard.jpg";
@@ -527,9 +527,9 @@ onBeforeUnmount(() => {
           </div>
           <div class="testimonial-grid">
             <article v-for="item in testimonialCards" :key="item.title" class="testimonial-card reveal">
-              <p>{{ item.text }}</p>
+              <span class="testimonial-card-caption">{{ item.caption }}</span>
               <strong>{{ item.title }}</strong>
-              <span>{{ item.caption }}</span>
+              <p>{{ item.text }}</p>
             </article>
           </div>
         </div>
@@ -665,5 +665,9 @@ onBeforeUnmount(() => {
     </footer>
   </div>
 </template>
+
+
+
+
 
 

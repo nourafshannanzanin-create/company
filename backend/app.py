@@ -19,6 +19,35 @@ PORT = int(os.environ.get("PORT", "8000"))
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "K11223344!")
 TOKEN_TTL = timedelta(hours=12)
 
+def normalize_admin_password(raw_value):
+    value = str(raw_value or "").strip()
+    for ch in ("\u200c", "\u200f", "\u200e", "\ufeff", " ", "\t", "\r", "\n"):
+        value = value.replace(ch, "")
+
+    digit_map = str.maketrans({
+        "\u06f0": "0",
+        "\u06f1": "1",
+        "\u06f2": "2",
+        "\u06f3": "3",
+        "\u06f4": "4",
+        "\u06f5": "5",
+        "\u06f6": "6",
+        "\u06f7": "7",
+        "\u06f8": "8",
+        "\u06f9": "9",
+        "\u0660": "0",
+        "\u0661": "1",
+        "\u0662": "2",
+        "\u0663": "3",
+        "\u0664": "4",
+        "\u0665": "5",
+        "\u0666": "6",
+        "\u0667": "7",
+        "\u0668": "8",
+        "\u0669": "9",
+    })
+    return value.translate(digit_map)
+
 
 db_lock = threading.Lock()
 session_lock = threading.Lock()
@@ -180,8 +209,9 @@ class ApiHandler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/admin/login":
-            password = str(payload.get("password", ""))
-            if not compare_digest(password, ADMIN_PASSWORD):
+            password = normalize_admin_password(payload.get("password", ""))
+            expected_password = normalize_admin_password(ADMIN_PASSWORD)
+            if not compare_digest(password, expected_password):
                 self.respond_json(HTTPStatus.UNAUTHORIZED, {"error": "رمز عبور نادرست است."})
                 return
 
@@ -263,3 +293,5 @@ def run():
 
 if __name__ == "__main__":
     run()
+
+

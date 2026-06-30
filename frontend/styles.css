@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --font-base: "Vazirmatn Variable", "Vazirmatn", sans-serif;
   --font-heading: "Vazirmatn ExtraBold", "Vazirmatn Variable", "Vazirmatn", sans-serif;
   --weight-text: 430;
@@ -33,8 +33,8 @@
 @font-face {
   font-family: "Vazirmatn Variable";
   src:
-    url("../docs/font/webfonts/Vazirmatn[wght].woff2") format("woff2-variations"),
-    url("../docs/font/webfonts/Vazirmatn[wght].woff2") format("woff2");
+    url("./src/assets/fonts/Vazirmatn-VF.woff2") format("woff2-variations"),
+    url("./src/assets/fonts/Vazirmatn-VF.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -42,7 +42,7 @@
 
 @font-face {
   font-family: "Vazirmatn ExtraBold";
-  src: url("../docs/font/ttf/Vazirmatn-ExtraBold.ttf") format("truetype");
+  src: url("./src/assets/fonts/Vazirmatn-ExtraBold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -819,6 +819,30 @@ h6 {
   color: var(--accent-500);
   margin-bottom: 12px;
 }
+.testimonial-card {
+  color: var(--ink-900);
+}
+
+.testimonial-card strong {
+  display: block;
+  margin: 0 0 10px;
+  color: var(--primary-900);
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+}
+
+.testimonial-card-caption {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent-500);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+}
+
+.testimonial-card p {
+  margin: 0;
+  color: var(--ink-700);
+}
 
 .testimonial-shell {
   display: grid;
@@ -1226,6 +1250,11 @@ footer[id] {
   min-height: calc(100vh - 200px);
 }
 
+.admin-grid-compact {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 540px);
+  align-items: start;
+}
+
 .admin-hero-copy h1,
 .admin-login-card h2,
 .admin-list-heading h2,
@@ -1516,3 +1545,8 @@ footer[id] {
 .admin-list-section .site-form-note-error {
   color: #7e2c2c;
 }
+
+
+
+
+
