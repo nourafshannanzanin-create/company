@@ -1,7 +1,6 @@
 ﻿<script setup>
 import { computed, onMounted, ref } from "vue";
 import featureStrategyImage from "./assets/photos/team-profile.png";
-import heroCollaborationImage from "./assets/photos/team-profile.png";
 
 const API_BASE = (import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000").replace(/\/$/, "");
 const ADMIN_TOKEN_KEY = "karimi_admin_token";
@@ -59,6 +58,17 @@ const TEXT = {
   phone: "\u0634\u0645\u0627\u0631\u0647 \u062a\u0645\u0627\u0633",
   email: "\u0627\u06cc\u0645\u06cc\u0644",
   projectDetails: "\u062a\u0648\u0636\u06cc\u062d\u0627\u062a \u067e\u0631\u0648\u0698\u0647",
+  reviewStatus: "\u0648\u0636\u0639\u06cc\u062a \u0628\u0631\u0631\u0633\u06cc",
+  reviewNote: "\u062a\u0648\u0636\u06cc\u062d\u0627\u062a \u0645\u062f\u06cc\u0631",
+  reviewNotePlaceholder: "\u062f\u0644\u06cc\u0644 \u062a\u0627\u06cc\u06cc\u062f \u06cc\u0627 \u0631\u062f \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0631\u0627 \u0628\u0646\u0648\u06cc\u0633\u06cc\u062f",
+  approve: "\u062a\u0627\u06cc\u06cc\u062f",
+  reject: "\u0631\u062f",
+  pending: "\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u0628\u0631\u0631\u0633\u06cc",
+  approved: "\u062a\u0627\u06cc\u06cc\u062f \u0634\u062f\u0647",
+  rejected: "\u0631\u062f \u0634\u062f\u0647",
+  reviewedAt: "\u0632\u0645\u0627\u0646 \u0628\u0631\u0631\u0633\u06cc",
+  savingReview: "\u062f\u0631 \u062d\u0627\u0644 \u0630\u062e\u06cc\u0631\u0647...",
+  reviewSaved: "\u0628\u0631\u0631\u0633\u06cc \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0630\u062e\u06cc\u0631\u0647 \u0634\u062f.",
   emptyAlt: "\u0647\u0646\u0648\u0632 \u062b\u0628\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f",
   emptyTitle: "\u0647\u0646\u0648\u0632 \u0647\u06cc\u0686 \u062f\u0631\u062e\u0648\u0627\u0633\u062a \u0645\u0634\u0627\u0648\u0631\u0647 \u0627\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647 \u0627\u0633\u062a",
   emptyDescription: "\u0628\u0647 \u0645\u062d\u0636 \u062b\u0628\u062a \u0641\u0631\u0645 \u0627\u0632 \u0633\u0645\u062a \u0633\u0627\u06cc\u062a\u060c \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0627\u06cc\u0646\u062c\u0627 \u0646\u0645\u0627\u06cc\u0634 \u062f\u0627\u062f\u0647 \u0645\u06cc \u0634\u0648\u062f.",
@@ -84,6 +94,7 @@ const adminToken = ref(localStorage.getItem(ADMIN_TOKEN_KEY) || "");
 const loginState = ref({ loading: false, type: "", message: "" });
 const entriesState = ref({ loading: false, type: "", message: "" });
 const entries = ref([]);
+const reviewDrafts = ref({});
 
 const formatter = new Intl.DateTimeFormat("fa-IR", {
   dateStyle: "medium",
@@ -123,6 +134,21 @@ const formatDate = (value) => {
 };
 
 const serviceLabel = (value) => value || TEXT.notProvided;
+const statusLabel = (value) => TEXT[value] || TEXT.pending;
+
+const syncReviewDrafts = () => {
+  reviewDrafts.value = Object.fromEntries(
+    entries.value.map((entry) => [
+      entry.id,
+      {
+        note: entry.admin_note || "",
+        loading: false,
+        message: "",
+        type: "",
+      },
+    ])
+  );
+};
 
 const todayKey = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Tehran" });
 
@@ -171,11 +197,78 @@ const loadEntries = async () => {
     });
 
     entries.value = Array.isArray(data.entries) ? data.entries : [];
+    syncReviewDrafts();
     entriesState.value = { loading: false, type: "success", message: TEXT.entriesLoaded };
   } catch (error) {
     persistToken("");
     entries.value = [];
+    reviewDrafts.value = {};
     entriesState.value = { loading: false, type: "error", message: error.message };
+  }
+};
+
+const setReviewNote = (entryId, value) => {
+  const current = reviewDrafts.value[entryId] || { note: "", loading: false, message: "", type: "" };
+  reviewDrafts.value = {
+    ...reviewDrafts.value,
+    [entryId]: {
+      ...current,
+      note: value,
+      message: "",
+      type: "",
+    },
+  };
+};
+
+const reviewEntry = async (entry, status) => {
+  const current = reviewDrafts.value[entry.id] || { note: "", loading: false, message: "", type: "" };
+  if (current.loading) {
+    return;
+  }
+
+  reviewDrafts.value = {
+    ...reviewDrafts.value,
+    [entry.id]: {
+      ...current,
+      loading: true,
+      message: "",
+      type: "",
+    },
+  };
+
+  try {
+    const data = await requestJson(`/api/admin/submissions/${entry.id}/review`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${adminToken.value}`,
+      },
+      body: JSON.stringify({
+        status,
+        admin_note: current.note,
+      }),
+    });
+
+    const updatedEntry = data.entry || entry;
+    entries.value = entries.value.map((item) => (item.id === updatedEntry.id ? updatedEntry : item));
+    reviewDrafts.value = {
+      ...reviewDrafts.value,
+      [entry.id]: {
+        note: updatedEntry.admin_note || "",
+        loading: false,
+        message: data.message || TEXT.reviewSaved,
+        type: "success",
+      },
+    };
+  } catch (error) {
+    reviewDrafts.value = {
+      ...reviewDrafts.value,
+      [entry.id]: {
+        ...current,
+        loading: false,
+        message: error.message,
+        type: "error",
+      },
+    };
   }
 };
 
@@ -400,6 +493,54 @@ onMounted(() => {
                   <span>{{ TEXT.projectDetails }}</span>
                   <p>{{ entry.project_details }}</p>
                 </div>
+
+                <div class="admin-entry-details admin-review-panel">
+                  <div class="admin-review-header">
+                    <span>{{ TEXT.reviewStatus }}</span>
+                    <strong :class="['admin-review-status', `is-${entry.status || 'pending'}`]">
+                      {{ statusLabel(entry.status || 'pending') }}
+                    </strong>
+                  </div>
+                  <p v-if="entry.reviewed_at" class="admin-review-time">
+                    {{ TEXT.reviewedAt }}: {{ formatDate(entry.reviewed_at) }}
+                  </p>
+                  <label class="admin-field admin-review-field">
+                    <span>{{ TEXT.reviewNote }}</span>
+                    <textarea
+                      :value="reviewDrafts[entry.id]?.note || ''"
+                      rows="4"
+                      :placeholder="TEXT.reviewNotePlaceholder"
+                      @input="setReviewNote(entry.id, $event.target.value)"
+                    ></textarea>
+                  </label>
+                  <div class="admin-review-actions">
+                    <button
+                      class="button button-primary"
+                      type="button"
+                      :disabled="reviewDrafts[entry.id]?.loading"
+                      @click="reviewEntry(entry, 'approved')"
+                    >
+                      {{ reviewDrafts[entry.id]?.loading ? TEXT.savingReview : TEXT.approve }}
+                    </button>
+                    <button
+                      class="button button-secondary admin-reject-button"
+                      type="button"
+                      :disabled="reviewDrafts[entry.id]?.loading"
+                      @click="reviewEntry(entry, 'rejected')"
+                    >
+                      {{ reviewDrafts[entry.id]?.loading ? TEXT.savingReview : TEXT.reject }}
+                    </button>
+                  </div>
+                  <p
+                    v-if="reviewDrafts[entry.id]?.message"
+                    :class="[
+                      'site-form-note',
+                      reviewDrafts[entry.id]?.type === 'success' ? 'site-form-note-success' : 'site-form-note-error',
+                    ]"
+                  >
+                    {{ reviewDrafts[entry.id]?.message }}
+                  </p>
+                </div>
               </article>
             </div>
 
@@ -414,7 +555,5 @@ onMounted(() => {
     </main>
   </div>
 </template>
-
-
 
 

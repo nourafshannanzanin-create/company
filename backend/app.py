@@ -70,10 +70,26 @@ def init_db():
                 email TEXT NOT NULL,
                 service TEXT NOT NULL,
                 project_details TEXT NOT NULL,
-                submitted_at TEXT NOT NULL
+                submitted_at TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'pending',
+                admin_note TEXT NOT NULL DEFAULT '',
+                reviewed_at TEXT
             )
             """
         )
+        existing_columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(consultations)").fetchall()
+        }
+        if "status" not in existing_columns:
+            connection.execute(
+                "ALTER TABLE consultations ADD COLUMN status TEXT NOT NULL DEFAULT 'pending'"
+            )
+        if "admin_note" not in existing_columns:
+            connection.execute(
+                "ALTER TABLE consultations ADD COLUMN admin_note TEXT NOT NULL DEFAULT ''"
+            )
+        if "reviewed_at" not in existing_columns:
+            connection.execute("ALTER TABLE consultations ADD COLUMN reviewed_at TEXT")
         connection.commit()
 
 
@@ -122,8 +138,11 @@ def insert_consultation(payload):
                 email,
                 service,
                 project_details,
-                submitted_at
-            ) VALUES (?, ?, ?, ?, ?, ?)
+                submitted_at,
+                status,
+                admin_note,
+                reviewed_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 payload["full_name"],
@@ -132,12 +151,18 @@ def insert_consultation(payload):
                 payload["service"],
                 payload["project_details"],
                 submitted_at,
+                "pending",
+                "",
+                None,
             ),
         )
         connection.commit()
         return {
             "id": cursor.lastrowid,
             "submitted_at": submitted_at,
+            "status": "pending",
+            "admin_note": "",
+            "reviewed_at": None,
         }
 
 
@@ -146,12 +171,64 @@ def fetch_consultations():
         connection.row_factory = sqlite3.Row
         rows = connection.execute(
             """
-            SELECT id, full_name, phone, email, service, project_details, submitted_at
+            SELECT
+                id,
+                full_name,
+                phone,
+                email,
+                service,
+                project_details,
+                submitted_at,
+                status,
+                admin_note,
+                reviewed_at
             FROM consultations
             ORDER BY datetime(submitted_at) DESC, id DESC
             """
         ).fetchall()
     return [dict(row) for row in rows]
+
+
+def update_consultation_review(entry_id, payload):
+    reviewed_at = utc_now().isoformat()
+    with db_lock, sqlite3.connect(DB_PATH) as connection:
+        connection.row_factory = sqlite3.Row
+        cursor = connection.execute(
+            """
+            UPDATE consultations
+            SET status = ?, admin_note = ?, reviewed_at = ?
+            WHERE id = ?
+            """,
+            (
+                payload["status"],
+                payload["admin_note"],
+                reviewed_at,
+                entry_id,
+            ),
+        )
+        if cursor.rowcount == 0:
+            return None
+
+        row = connection.execute(
+            """
+            SELECT
+                id,
+                full_name,
+                phone,
+                email,
+                service,
+                project_details,
+                submitted_at,
+                status,
+                admin_note,
+                reviewed_at
+            FROM consultations
+            WHERE id = ?
+            """,
+            (entry_id,),
+        ).fetchone()
+        connection.commit()
+    return dict(row) if row else None
 
 
 class ApiHandler(BaseHTTPRequestHandler):
@@ -191,6 +268,35 @@ class ApiHandler(BaseHTTPRequestHandler):
         path = urlparse(self.path).path
         payload = self.read_json_body()
         if payload is None:
+            return
+
+        if path.startswith("/api/admin/submissions/") and path.endswith("/review"):
+            token = self.extract_bearer_token()
+            if not is_session_valid(token):
+                self.respond_json(HTTPStatus.UNAUTHORIZED, {"error": "احراز هویت نامعتبر است."})
+                return
+
+            entry_id = self.extract_submission_id(path)
+            if entry_id is None:
+                self.respond_json(HTTPStatus.NOT_FOUND, {"error": "درخواست موردنظر پیدا نشد."})
+                return
+
+            normalized_review = self.validate_review_payload(payload)
+            if normalized_review is None:
+                return
+
+            updated = update_consultation_review(entry_id, normalized_review)
+            if updated is None:
+                self.respond_json(HTTPStatus.NOT_FOUND, {"error": "درخواست موردنظر پیدا نشد."})
+                return
+
+            self.respond_json(
+                HTTPStatus.OK,
+                {
+                    "message": "وضعیت درخواست با موفقیت ذخیره شد.",
+                    "entry": updated,
+                },
+            )
             return
 
         if path == "/api/consultations":
@@ -260,6 +366,29 @@ class ApiHandler(BaseHTTPRequestHandler):
             return None
 
         return fields
+
+    def validate_review_payload(self, payload):
+        status = str(payload.get("status", "")).strip().lower()
+        admin_note = str(payload.get("admin_note", "")).strip()
+
+        if status not in {"approved", "rejected"}:
+            self.respond_json(HTTPStatus.BAD_REQUEST, {"error": "وضعیت انتخاب‌شده معتبر نیست."})
+            return None
+
+        if not admin_note:
+            self.respond_json(HTTPStatus.BAD_REQUEST, {"error": "توضیحات مدیر را وارد کنید."})
+            return None
+
+        return {"status": status, "admin_note": admin_note}
+
+    def extract_submission_id(self, path):
+        parts = [part for part in path.split("/") if part]
+        if len(parts) != 5 or parts[:3] != ["api", "admin", "submissions"] or parts[4] != "review":
+            return None
+        try:
+            return int(parts[3])
+        except ValueError:
+            return None
 
     def extract_bearer_token(self):
         authorization = self.headers.get("Authorization", "")
